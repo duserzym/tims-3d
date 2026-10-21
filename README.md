@@ -58,4 +58,11 @@ tools/          headless screenshot / smoke test
 - Thermo Fisher, *Triton XT TIMS* brochure (BR30537) — <https://documents.thermofisher.com/TFS-Assets/CMD/brochures/br-30537-triton-xt-tims-br30537-en.pdf>
 - Johnson (1928) *Phys. Rev.* 32, 97; Nyquist (1928) *Phys. Rev.* 32, 110; Daly (1960) *Rev. Sci. Instrum.* 31, 264; ASTM C1672 (total evaporation of U/Pu)
 
-Vendor and product names are used only to identify the instruments being modelled. This project is not affiliated with Isotopx, Nu Instruments (AMETEK) or Thermo Fisher Scientific.
+## Licence, trademarks and attribution
+
+- **Code**: MIT (see `LICENSE`).
+- **Bundled dependency**: three.js (MIT). Its licence text ships with the site as `THIRD_PARTY_LICENSES.txt` (from `public/`), because the minified bundle strips source comments. Dev-only tools (Vite, Vitest: MIT; Playwright: Apache-2.0) are not distributed.
+- **Trademarks**: Isotopx, Phoenix, ATONA, Zeptona, WARP, Nu Instruments, Nu TIMS, Zoom Optics, Thermo Scientific, Triton, Triton XT and other product names belong to their owners. They are used only to identify the instruments being modelled (nominative use). No logos, trade dress or vendor artwork are reproduced, and the cabinets use neutral colours. This project is independent and is not affiliated with or endorsed by Isotopx, Nu Instruments (AMETEK) or Thermo Fisher Scientific.
+- **Vendor documents**: brochures and spec sheets are cited and linked. The project restates technical facts in its own words rather than copying text, figures or images from them.
+- **Data**: ionization energies come from NIST ASD (a US Government work). Isotope masses and abundances are standard reference facts.
+- **3-D models** are original, schematic constructions from public descriptions and physics. They are not reverse-engineered CAD.

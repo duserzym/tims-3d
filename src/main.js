@@ -26,6 +26,10 @@ for (const s of SCENES) {
   b.addEventListener('click', () => { go(s.id); $('#app').classList.remove('nav-open'); });
   nav.append(b);
 }
+nav.append(h('div', { class: 'nav-legal' },
+  h('div', { html: '<b>About &amp; legal</b>' }),
+  h('div', { html: 'Independent educational models. Not affiliated with or endorsed by Isotopx, Nu Instruments (AMETEK) or Thermo Fisher Scientific; product names are trademarks of their owners and are used only to identify the instruments modelled. Geometry is schematic, not vendor drawings; assumed values are flagged in each scene.' }),
+  h('div', { html: 'Code: <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT</a> · Built with three.js (MIT) — <a href="THIRD_PARTY_LICENSES.txt" target="_blank">third-party licenses</a>' })));
 $('#navToggle').addEventListener('click', () => $('#app').classList.toggle('nav-open'));
 
 function parseHash() {

@@ -87,6 +87,9 @@ sup, sub { font-size: 0.72em; line-height: 0; }
   display: flex; gap: 10px; align-items: flex-start; width: 100%; text-align: left; border: 0; background: none;
   padding: 8px 10px; border-radius: 8px; cursor: pointer; color: var(--fg);
 }
+.nav-legal { margin: 18px 8px 0; padding-top: 12px; border-top: 1px solid var(--border); font-size: 11px; line-height: 1.45; color: var(--fg-faint); display: grid; gap: 6px; }
+.nav-legal b { color: var(--fg-muted); }
+.nav-legal a { color: var(--accent); }
 .nav-item:hover { background: var(--bg-sunk); }
 .nav-item.active { background: var(--accent-weak); color: var(--accent); }
 .nav-item .ico { width: 22px; flex: none; text-align: center; opacity: 0.85; }
