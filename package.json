@@ -1,0 +1,23 @@
+{
+  "name": "tims-3d",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Explodable, physically grounded three.js models of thermal ionization mass spectrometers (TIMS): Isotopx Phoenix, Nu TIMS, Thermo Triton XT, detectors, ion source and filament physics.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "screenshots": "node tools/screenshots.mjs"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0",
+    "vite": "^7.1.0",
+    "vitest": "^3.2.0"
+  },
+  "license": "MIT"
+}
