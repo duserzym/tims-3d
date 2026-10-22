@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">TIMS 3D icon</title>
+  <desc id="desc">A glowing filament sends an ion beam into a sector magnet, which splits it into three isotope beams that land in Faraday cups.</desc>
+  <defs>
+    <linearGradient id="tile" x2="0.8" y2="1">
+      <stop stop-color="#ffffff"/><stop offset="1" stop-color="#e9eef5"/>
+    </linearGradient>
+    <linearGradient id="iron" x2="1" y2="1">
+      <stop stop-color="#55606f"/><stop offset="1" stop-color="#2f3742"/>
+    </linearGradient>
+    <radialGradient id="hot" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#fff6d6"/><stop offset="0.35" stop-color="#ffc35a"/><stop offset="1" stop-color="#ff8a2a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="9" stdDeviation="10" flood-color="#0f1b2d" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  <rect x="36" y="36" width="440" height="440" rx="88" fill="url(#tile)"/>
+  <rect x="36" y="36" width="440" height="440" rx="88" fill="none" stroke="#d9e1ec" stroke-width="10"/>
+  <g filter="url(#shadow)">
+    <path d="M190,405 A185,185 0 0 0 375,220 L305,220 A115,115 0 0 1 190,335 Z" fill="url(#iron)"/>
+    <path d="M190,405 A185,185 0 0 0 375,220" fill="none" stroke="#c7783f" stroke-width="12" stroke-linecap="round"/>
+    <path d="M305,220 A115,115 0 0 1 190,335" fill="none" stroke="#c7783f" stroke-width="10" stroke-linecap="round"/>
+    <rect x="286" y="62" width="28" height="40" rx="5" fill="#8a96a6"/>
+    <rect x="326" y="58" width="28" height="40" rx="5" fill="#8a96a6"/>
+    <rect x="366" y="62" width="28" height="40" rx="5" fill="#8a96a6"/>
+    <rect x="62" y="388" width="44" height="22" rx="6" fill="#d8d2c4"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M100,370 L190,370" stroke="#ffb547" filter="url(#glow)" stroke-width="12" stroke-opacity="0.7"/>
+    <path d="M100,370 L190,370" stroke="#e8792b"/>
+    <path d="M190,370 A140,140 0 0 0 330,230 L301,104" stroke="#3b82f6"/>
+    <path d="M190,370 A150,150 0 0 0 340,220 L340,100" stroke="#f59e0b"/>
+    <path d="M190,370 A160,160 0 0 0 350,210 L379,104" stroke="#10b981"/>
+  </g>
+  <circle cx="84" cy="372" r="46" fill="url(#hot)"/>
+  <path d="M70,388 L70,366 L98,366 L98,388" fill="none" stroke="#fff3c4" stroke-width="5" stroke-linejoin="round"/>
+</svg>
