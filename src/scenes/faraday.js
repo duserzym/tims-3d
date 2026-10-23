@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { Exploder } from '../core/explode.js';
 import { IonBeam, Sparks } from '../core/beam.js';
 import { Chart, PALETTE } from '../core/chart.js';
-import { section, slider, select, toggle, readouts, note, para, table, sources, h, rafThrottle } from '../core/ui.js';
+import { section, slider, select, toggle, readouts, note, para, table, sources, buttons, h, rafThrottle } from '../core/ui.js';
 import { buildFaradayCup } from '../components/faraday.js';
 import { registerParts } from '../components/parts.js';
 import {
@@ -60,6 +60,7 @@ export default {
       para('A Faraday cup counts <b>charge</b>, not ions: every ion that enters is collected regardless of mass or energy, so the detector has <b>no mass bias</b> and essentially unlimited lifetime. The current (fA–nA) is converted to a voltage by a transimpedance amplifier with a high-ohmic feedback resistor: V = I·R (10¹¹ Ω: 1 V ≙ 10 pA ≙ 6.24×10⁷ ions/s).'),
       para('Explode the model to see the defining slit, the electron suppressor, magnetic suppression, the graphite-lined bucket with inclined floor, the insulators, feedthrough, and the evacuated amplifier housing with its glass-encapsulated feedback resistor.'),
     );
+    intro.body.append(buttons([{ label: 'Inside resistor amplifiers →', onClick: () => { location.hash = 'scene=amplifier&mode=resistor'; } }, { label: 'Inside capacitor amplifiers →', onClick: () => { location.hash = 'scene=amplifier&mode=capacitor'; } }, { label: 'Zoom amplifier housing', onClick: () => ctx.app.focusOn(byName('Electrometer')) }]).el);
     panel.push(intro.el);
 
     const ctl = section('Amplifier & beam', { icon: '⚙' });
@@ -113,7 +114,7 @@ export default {
       para('<b>√R scaling.</b> The signal scales with R, the noise voltage with √R, so S/N ∝ √R: 10¹³ Ω is 10× quieter (current-equivalent) than 10¹¹ Ω at the same temperature. Cooling helps only as √T.'),
       para('<b>Shot-noise crossover.</b> Johnson and counting noise are equal when I·R = 2kT/e ≈ 52 mV at 300 K — the same output voltage for every resistor. Above that, a bigger resistor buys nothing except a smaller dynamic range (10¹³ Ω saturates at 5 pA for a 50 V output).'),
       para('<b>Gain calibration & virtual amplifier.</b> Each amplifier’s gain is calibrated against a precise reference current (Thermo: 3.3 pA calibration board). The Triton’s relay matrix can connect any amplifier to any cup; rotating amplifiers between cups (“virtual amplifier”) cancels residual gain-factor errors.'),
-      para('<b>ATONA.</b> Isotopx’s ATONA replaces the feedback resistor by a capacitive integrator (charge = ∫I dt), removing range switching and τ problems; Isotopx reports a single detector covering ~10⁻¹⁸–10⁻⁸ A. The Johnson-equivalent resistance used here is an illustrative derivation from Isotopx’s Zeptona note (Zeptona ≈ 10¹⁴ Ω-equivalent and ~5× quieter than ATONA).'),
+      para('<b>ATONA.</b> Isotopx’s ATONA replaces the feedback resistor by a capacitive integrator (charge = ∫I dt), using charge integration and active charge management rather than a high-ohmic measuring resistor; Isotopx reports a single detector covering ~10⁻¹⁸–10⁻⁸ A. The Johnson-equivalent resistance used here is an illustrative derivation from Isotopx’s Zeptona note (Zeptona ≈ 10¹⁴ Ω-equivalent and ~5× quieter than ATONA).'),
       note('Model limits: excess (1/f) noise, digitiser quantisation, baseline drift, cup cross-talk and amplifier input-voltage noise are not included. τ values are illustrative.', 'warn'),
       sources([
         { label: 'Thermo Triton XT brochure', url: 'https://documents.thermofisher.com/TFS-Assets/CMD/brochures/br-30537-triton-xt-tims-br30537-en.pdf' },

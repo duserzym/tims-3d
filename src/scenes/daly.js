@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { Exploder } from '../core/explode.js';
 import { IonBeam, Sparks } from '../core/beam.js';
 import { Chart } from '../core/chart.js';
-import { section, slider, segmented, readouts, note, para, sources, debounce, h } from '../core/ui.js';
+import { section, slider, segmented, readouts, note, para, sources, buttons, debounce, h } from '../core/ui.js';
 import { buildDaly } from '../components/daly.js';
 import { registerParts } from '../components/parts.js';
 import {
@@ -125,6 +125,7 @@ export default {
 
     const intro = section('Daly detector', { icon: '◉' });
     intro.body.append(para('A <b>Daly detector</b> converts each ion into a flash of light so the electron multiplier (a photomultiplier) can sit <b>outside the vacuum</b>. Ions hit a polished Al <b>knob</b> at −20…−35 kV; the ejected secondary electrons are accelerated to a grounded <b>scintillator</b>; photons cross a quartz <b>window</b> to the <b>PMT</b>.'));
+    intro.body.append(buttons([{ label: 'Step through conversion & readout →', onClick: () => { location.hash = 'scene=detectorSignal&detector=daly'; } }]).el);
     const ro = readouts([
       { id: 'E', label: 'Ion impact energy' }, { id: 'g', label: 'Mean SE yield γ' },
       { id: 'pe', label: 'Mean pulse (photoelectrons)' }, { id: 'eff', label: 'Counting efficiency' },

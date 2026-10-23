@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { Exploder } from '../core/explode.js';
 import { IonBeam } from '../core/beam.js';
 import { Chart } from '../core/chart.js';
-import { section, slider, segmented, readouts, note, para, sources, debounce, h } from '../core/ui.js';
+import { section, slider, segmented, readouts, note, para, sources, buttons, debounce, h } from '../core/ui.js';
 import { buildSEM } from '../components/sem.js';
 import { registerParts } from '../components/parts.js';
 import {
@@ -84,6 +84,7 @@ export default {
 
     const intro = section('Secondary electron multiplier', { icon: '⋰' });
     intro.body.append(para('In a <b>discrete-dynode SEM</b> the ion strikes the <b>first dynode directly</b>; each electron then hits the next dynode and releases δ≈2–3 more. After ~21 stages one ion becomes a ~10⁷–10⁸-electron pulse at the anode. A <b>conversion-dynode</b> variant (Isotopx MIC-style) puts an off-axis converter at several kV in front of a multiplier mounted at 90°.'));
+    intro.body.append(buttons([{ label: 'Step through conversion & readout →', onClick: () => { location.hash = 'scene=detectorSignal&detector=sem'; } }]).el);
     const ro = readouts([
       { id: 'E', label: 'Ion impact energy' }, { id: 'g', label: 'Ion→e⁻ yield γ' },
       { id: 'p0', label: 'P(no electron) = e^−γ' }, { id: 'eff', label: 'Counting efficiency' },

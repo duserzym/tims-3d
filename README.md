@@ -10,12 +10,18 @@ The ion optics and detector behaviour come from small physics modules, so the be
 | **Source potentials & selector tuning** | A 2-D Laplace solution (SOR with superposed basis fields) of a generic Nier-type lens stack, with RK4 ion trajectories and an equipotential map. Controls cover extraction, focus, Y-symmetry, deflection, the source slit and the angular selector slit. Auto-tune runs a coordinate search, and there are focus-scan and phase-space charts. |
 | **Filaments: 1, 2, 3 & element usage** | Single, double, triple and N-TIMS assemblies that glow by temperature. An element "usage system" maps each element to its configuration, loading and ion species, and a Saha–Langmuir calculator covers Re, Ta, W, Pt and Ni. |
 | **Faraday cup & Johnson noise** | An explodable cup (suppression electrode, magnets and graphite bucket) with its amplifier and feedback resistor. Johnson–Nyquist and shot-noise budgets cover 10¹⁰–10¹³ Ω, ATONA and Zeptona, plus the R-independent 2kT/e ≈ 52 mV crossover. A live trace shows the τ lag after a peak jump. |
+| **Inside the amplifiers** | Magnified resistor-feedback and capacitive integrate/reset circuits. Explode the resistor envelope, capacitor plates and dielectric; zoom into the input, op-amp and reset/ADC. Replay a beam step with RC settling, capacitor voltage slope, stored charge, reset exclusion and output clipping. |
+| **Inside the detector signal chain** | Six pauseable stages for Daly → PMT or direct-dynode SEM, with live exploded anchors and stage zoom. A separate pulse-height threshold / non-paralyzable dead-time example shows counted and rejected events. |
 | **Daly detector** | The ion → knob → electrons → scintillator → window → PMT chain, with an animated cascade. Monte-Carlo pulse-height distribution, plateau curve and dead time. |
 | **Ion counter (SEM)** | A discrete-dynode and a conversion-dynode multiplier, an avalanche animation, a Pólya PHD, mass bias, and ageing with extracted charge. |
 | **Daly vs ion counter** | The same beam on both detectors: comparison table, overlaid PHDs, efficiency vs mass, and 24 h yield drift. |
 | **Total evaporation** | Rayleigh fractionation of a filament reservoir, comparing total evaporation (TE) with a conventional window. Includes Nu-style tuning on an ion counter and the pre-analysis loss it avoids. |
 
 Global controls: **Explode** slider (<kbd>E</kbd>), **X-ray** housings (<kbd>X</kbd>), labels (<kbd>L</kbd>), beams (<kbd>B</kbd>), glow, and PNG export. Click any part for a short physical explanation. Deep links work, for example `#scene=instrument&vendor=nu&element=U&explode=0.6`.
+
+Explore the new workbenches: [resistor feedback](https://duserzym.github.io/tims-3d/#scene=amplifier&mode=resistor), [capacitor integration](https://duserzym.github.io/tims-3d/#scene=amplifier&mode=capacitor), [Daly signal chain](https://duserzym.github.io/tims-3d/#scene=detectorSignal&detector=daly), [SEM signal chain](https://duserzym.github.io/tims-3d/#scene=detectorSignal&detector=sem).
+
+The capacitive workbench is a conventional ideal integrate/reset teaching circuit, not a reconstruction of proprietary ATONA/Zeptona charge management. Circuit dimensions, carrier markers, detector stage timing and electronics examples are schematic. See the source links and limits in each scene.
 
 ## Run
 
@@ -47,6 +53,7 @@ tools/          headless screenshot / smoke test
 - **Ion optics**: the magnetic sectors are uniform-field regions with optional pole-face rotation. There are no fringe fields. Ray tracing is analytic (line → arc → line). The tests check that the model reproduces Barber's rule (L = R·cot(φ/2)) and D = R₀ for symmetric normal entry, and that ε = tan⁻¹½ doubles D (classic extended geometry).
 - **Vendor numbers**: every row in `src/instruments/specs.js` carries a *source* or *assumed* flag that the UI shows. Vendors do not publish magnet radii or pole-face angles, so those are **model assumptions**. For the Phoenix, the pole-face angle is solved so that the traced optics give the published 54 cm dispersion.
 - **Detector constants** (secondary-electron yields, PMT photoelectrons per electron, ageing constants) are illustrative. The UI labels them that way. They reproduce the documented qualitative behaviour, but they are not calibrations.
+- **Amplifiers**: the resistor scene solves the ideal first-order Rf ∥ Cf feedback response; the capacitor scene integrates the beam only inside each measurement window and excludes reset. ±10 V clipping is illustrative; a saturated op-amp no longer maintains virtual ground.
 - **Lens field**: a planar 2-D Laplace solution of a generic lens stack with no space charge. Trajectories in electrostatic lenses are mass-independent, so one set of rays serves every isotope.
 
 ## Sources
@@ -56,6 +63,8 @@ tools/          headless screenshot / smoke test
 - Isotopx, *Phoenix* — <https://www.isotopx.com/products/phoenix>; *Zeptona* and *multi-ion-counting* application notes
 - Boise State IGL instrument descriptions (Phoenix X62, Isoprobe-T) — <https://www.boisestate.edu/earth-isotope/igl-infrastructure/thermal-ionization-mass-spectrometry-lab-erb-5116b/>
 - Thermo Fisher, *Triton XT TIMS* brochure (BR30537) — <https://documents.thermofisher.com/TFS-Assets/CMD/brochures/br-30537-triton-xt-tims-br30537-en.pdf>
+- Cox et al. (2020), capacitive Faraday amplifiers — <https://gchron.copernicus.org/articles/2/231/2020/>; active charge-management patent — <https://patents.google.com/patent/US11355332B2/en>
+- Hamamatsu, *Photomultiplier Tubes handbook* — <https://www.hamamatsu.com/content/dam/hamamatsu-photonics/sites/documents/99_SALES_LIBRARY/etd/PMT_handbook_v4E.pdf>
 - Johnson (1928) *Phys. Rev.* 32, 97; Nyquist (1928) *Phys. Rev.* 32, 110; Daly (1960) *Rev. Sci. Instrum.* 31, 264; ASTM C1672 (total evaporation of U/Pu)
 
 ## Licence, trademarks and attribution

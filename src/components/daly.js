@@ -196,7 +196,9 @@ export function buildDaly({ detail = 'full' } = {}) {
     cath.rotation.z = Math.PI / 2;
     cath.position.set(PMT_X0 + 1 * mm, 0, KNOB_Z);
     pmt.add(glass, face, cath);
-    mark('pmtCathode', pmt, new THREE.Vector3(PMT_X0 + 1.4 * mm, 0, KNOB_Z));
+    parts.push(part(glass, [0, 24 * mm, 0], 'PMT glass envelope', 'The evacuated envelope contains the photocathode, focusing optics, dynodes and anode.', { order: 0.35, shell: true }));
+    parts.push(part(cath, [-8 * mm, 0, 0], 'PMT photocathode', 'Photons can release photoelectrons. This optical conversion has a finite quantum efficiency before multiplication begins.', { order: 0.7 }));
+    mark('pmtCathode', cath, new THREE.Vector3(0, 0, 0));
     // focusing electrode
     const foc = mesh(tubeShell(9 * mm, 8.4 * mm, 8 * mm, 32), M.steelPolished(), { name: 'focusing electrode' });
     foc.rotation.z = Math.PI / 2;
@@ -204,7 +206,6 @@ export function buildDaly({ detail = 'full' } = {}) {
     pmt.add(foc);
     // dynode chain: 10 linear-focused dynodes, staggered
     const nD = full ? 10 : 6;
-    const dyGeoms = [];
     markers.pmtDynodes = [];
     for (let i = 0; i < nD; i++) {
       const g = new THREE.CylinderGeometry(4 * mm, 4 * mm, 9 * mm, 12, 1, true, 0, Math.PI * 0.7);
@@ -214,14 +215,15 @@ export function buildDaly({ detail = 'full' } = {}) {
       const rot = new THREE.Matrix4().makeRotationY(sgn > 0 ? Math.PI * 0.15 : Math.PI * 1.15);
       m4.makeTranslation(x, 0, KNOB_Z + sgn * 2.5 * mm).multiply(rot);
       g.applyMatrix4(m4);
-      dyGeoms.push(g);
+      const dynode = mesh(g, M.dynode(), { name: `PMT dynode ${i + 1}` });
+      pmt.add(dynode);
+      parts.push(part(dynode, [0, (i % 2 ? 1 : -1) * 8 * mm, (i - nD / 2) * 1.2 * mm], `PMT dynode ${i + 1}`, 'Each electron impact produces secondary electrons. The HV divider sets successive accelerating potentials; the stage yields multiply to produce the PMT gain.', { order: 0.82 }));
       const o = new THREE.Object3D();
       o.position.set(x, 0, KNOB_Z + sgn * 1.6 * mm);
-      pmt.add(o);
+      dynode.add(o);
       markers.pmtDynodes.push(o);
     }
-    const dyn = mesh(mergeGeometries(dyGeoms), M.dynode(), { name: 'PMT dynode chain' });
-    pmt.add(dyn);
+
     const anode = mesh(roundedBox(1 * mm, 8 * mm, 7 * mm, 0.3 * mm), M.steelPolished(), { name: 'anode' });
     anode.position.set(PMT_X0 + 68 * mm, 0, KNOB_Z);
     pmt.add(anode);
